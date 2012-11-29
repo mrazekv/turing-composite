@@ -16,7 +16,7 @@ se az v tin dalsim"""
         else:
             self.type=1
             self.char=char
-            self.data="R_" + char
+            self.data="R(" + char + ")"
 
     def do(self, ts):
         if self.type==0:
@@ -39,7 +39,7 @@ se az v tin dalsim"""
         else:
             self.type=1
             self.char=char
-            self.data="L_" + char
+            self.data="L(" + char + ")"
 
     def do(self, ts):
         if self.type==0:
@@ -67,6 +67,7 @@ class Mem:
 TS totiz nema zadny zasobnik a podobne"""
     def __init__(self, memory):
         self.memory=memory
+        self.data=" -- } " + memory + " --" 
 
     def do(self, ts):
         ts.saveMem(self.memory, ts.tape[ts.head])
@@ -112,12 +113,15 @@ C"""
         self.ts=ts
         self.memory=memory
     def __str__(self):
-        return self.ts.getMem(self.memory)
+        mem = self.ts.getMem(self.memory)
+        if mem == "":
+            return self.memory
+        return mem
 
 class Note:
     """Vytiskne poznamku a nemeni nic na pasce """
     def __init__(self, t):
-        self.data=t
+        self.data=" [" + t + "] "
     def do(self, ts):
         pass
 
