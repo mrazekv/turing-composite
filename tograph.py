@@ -24,7 +24,7 @@ class ToGraph:
             for c in cmd:
                 ci += 1
                 #cname = "<f%d> %s" % (ci, c.__class__.__name__)
-                cname = c.__class__.__name__
+                cname = str(c.data) #__class__.__name__
                 l.append(cname)
                 #c2s[c] = (sname, cname)
 

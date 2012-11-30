@@ -24,3 +24,20 @@ Nekonecna paska neni implementovana, na zacatek je nutne vlozit na pasku okolo d
 
 
 Vystup je barevny pro unixove konzole, kdy se cervenou barvou ukazuje pozice cteci hlavy
+
+
+Generovani obrazku
+==========================
+Kdyz nagenerujeme TS, tak misto funkce "test" importujeme kreslici knihovnu
+  
+from tograph import ToGraph
+.....
+
+
+print ToGraph(ts)
+
+
+Tento stroj transformujeme na obrazek pres
+  python test.py | dot -Tpng -o output.png
+
+Pripadne muzeme transformovat data do jineho formatu (napr svg) a ten pak upravit

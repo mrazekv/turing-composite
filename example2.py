@@ -15,4 +15,4 @@ ts.addCon(s2, s3, "y")
 ts.addCon(s3, s2)
 
 
-ts.test("____xyyxx_______________")
+ts.test("_xyyxx_______________")

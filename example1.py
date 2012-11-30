@@ -6,4 +6,4 @@ ts=TS()
 
 ts.AddCmd([R(), R(), R(), R(), Sr()])
 
-ts.test("______________xyyxx_________")
+ts.test("_xyyxx_________")

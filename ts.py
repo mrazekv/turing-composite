@@ -5,7 +5,7 @@
 import sys
 
 class R:
-""" Posun pasky doprava, bud o jeden symbol, nebo na dany symbol 
+    """ Posun pasky doprava, bud o jeden symbol, nebo na dany symbol 
 Pokud aktualni symbol je shodny s hledanym, nic se nedeje, hleda
 se az v tin dalsim"""
     def __init__(self, char=None):
@@ -16,7 +16,7 @@ se az v tin dalsim"""
         else:
             self.type=1
             self.char=char
-            self.data="R_" + char
+            self.data="R(" + char + ")"
 
     def do(self, ts):
         if self.type==0:
@@ -28,7 +28,7 @@ se az v tin dalsim"""
                     break
 
 class L:
-""" Posun pasky doleva, bud o jeden symbol, nebo na dany symbol 
+    """ Posun pasky doleva, bud o jeden symbol, nebo na dany symbol 
 Pokud aktualni symbol je shodny s hledanym, nic se nedeje, hleda
 se az v tin dalsim"""
     def __init__(self, char=None):
@@ -39,7 +39,7 @@ se az v tin dalsim"""
         else:
             self.type=1
             self.char=char
-            self.data="L_" + char
+            self.data="L(" + char + ")"
 
     def do(self, ts):
         if self.type==0:
@@ -50,7 +50,7 @@ se az v tin dalsim"""
                 if ts.tape[ts.head]==self.char:
                     break
 class C:
-""" Nahrazeni symbolu symbolem novym. Pokud se mu jako novy symbol
+    """ Nahrazeni symbolu symbolem novym. Pokud se mu jako novy symbol
 da MemRead, tak se vlozi symbol z pameti"""
     def __init__(self, new):
         self.new=new
@@ -63,10 +63,11 @@ da MemRead, tak se vlozi symbol z pameti"""
         ts.tape="".join(s)
 
 class Mem:
-""" Slouzi k zapamatovani symbolu do pameti TS. Jmeno musi byt unikatni
+    """ Slouzi k zapamatovani symbolu do pameti TS. Jmeno musi byt unikatni
 TS totiz nema zadny zasobnik a podobne"""
     def __init__(self, memory):
         self.memory=memory
+        self.data=" -- } " + memory + " --" 
 
     def do(self, ts):
         ts.saveMem(self.memory, ts.tape[ts.head])
@@ -74,7 +75,7 @@ TS totiz nema zadny zasobnik a podobne"""
 
 
 class Sr:
-"""Posune retezec neblankovych symbolu nachazejicich se vlevo od aktualni
+    """Posune retezec neblankovych symbolu nachazejicich se vlevo od aktualni
 pozice hlavy o 1 symbol doprava"""
     def __init__(self):
         self.data="Sr"
@@ -90,7 +91,7 @@ pozice hlavy o 1 symbol doprava"""
         ts.tape="".join(s)
 
 class Sl:
-"""Posune retezec neblankovych symbolu nachazejicich se vpravo od aktualni
+    """Posune retezec neblankovych symbolu nachazejicich se vpravo od aktualni
 pozice hlavy o 1 symbol doleva"""
     def __init__(self):
         self.data="Sl"
@@ -106,23 +107,26 @@ pozice hlavy o 1 symbol doleva"""
         ts.tape="".join(s)
         
 class MemRead:
-"""Slouzi pro cteni dat z pameti, neni to klasicky stroj! Vklada se az do symbolu
+    """Slouzi pro cteni dat z pameti, neni to klasicky stroj! Vklada se az do symbolu
 C"""
     def __init__(self, ts, memory):
         self.ts=ts
         self.memory=memory
     def __str__(self):
-        return self.ts.getMem(self.memory)
+        mem = self.ts.getMem(self.memory)
+        if mem == "":
+            return self.memory
+        return mem
 
 class Note:
-"""Vytiskne poznamku a nemeni nic na pasce """
+    """Vytiskne poznamku a nemeni nic na pasce """
     def __init__(self, t):
-        self.data=t
+        self.data=" [" + t + "] "
     def do(self, ts):
         pass
 
 class TS:
-""" Vlastni turinguv stroj """
+    """ Vlastni turinguv stroj """
     def __init__(self):
         self.counter=0
         self.cmd=[]
