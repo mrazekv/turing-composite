@@ -34,8 +34,21 @@ class ToGraph:
 
             res.append(s)
         
+        # group by chars
+        cons = {}
         for con in self.con:
             start, end, char = con
+            s_e = (start, end)
+            if s_e in cons:
+                cons[s_e].append(char)
+            else:
+                cons[s_e] = [char]
+
+        for k, v in cons.iteritems():
+            start, end = k
+            chars = v
+            # no None types
+            char = ", ".join(filter(lambda x: x, chars))
 
             start_node = c2s[start]
             end_node = c2s[end]
@@ -64,6 +77,7 @@ if __name__ == '__main__':
 
     ts.addCon(s1, s2)
     ts.addCon(s2, s3, "x")
+    ts.addCon(s2, s3, "z")
     ts.addCon(s2, s3, "y")
     ts.addCon(s3, s2)
 
