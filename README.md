@@ -42,15 +42,19 @@ Generovani obrazku
 ==========================
 Kdyz nagenerujeme TS, tak misto funkce "test" importujeme kreslici knihovnu
   
+```python
 from tograph import ToGraph
-.....
-
+from ts import *
+ts=TS()
+# inicializace TS
 
 print ToGraph(ts)
-
+```
 
 Tento stroj transformujeme na obrazek pres
-  python test.py | dot -Tpng -o output.png
+```
+python test.py | dot -Tpng -o output.png
+```
 
 Pripadne muzeme transformovat data do jineho formatu (napr svg) a ten pak upravit
 
