@@ -7,7 +7,7 @@ ts=TS()
 # Kopirovaci stroj  _w_ transformuje na _w_w_
 s1=ts.AddCmd([R("_"), R(), C("_"), L("_"), L("_")])
 s2=ts.AddCmd([R()])
-s3=ts.AddCmd([Mem("w"), C("_"), R("_"), R("_"), C(MemRead(ts, "w")), R(), C("_"), L("_"), L("_"), C(MemRead(ts, "w"))])
+s3=ts.AddCmd([Mem("w"), C("_"), R("_"), R("_"), MemRead(ts, "w"), R(), C("_"), L("_"), L("_"), MemRead(ts, "w")])
 
 ts.addCon(s1, s2)
 ts.addCon(s2, s3, "x")

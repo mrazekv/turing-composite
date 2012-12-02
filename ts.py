@@ -14,8 +14,12 @@ se az v tin dalsim"""
             self.data="R"
 
         else:
-            self.type=1
-            self.char=char
+            if len(char)==2 and char[0] == "!":
+                self.type=2
+                self.char=char[1]
+            else:
+                self.type=1
+                self.char=char
             self.data="R(" + char + ")"
 
     def do(self, ts):
@@ -24,7 +28,7 @@ se az v tin dalsim"""
         else:
             while 1:
                 ts.head+=1
-                if ts.tape[ts.head]==self.char:
+                if (self.type==1 and ts.tape[ts.head]==self.char) or (self.type==2 and ts.tape[ts.head]!=self.char):
                     break
 
 class L:
@@ -37,8 +41,12 @@ se az v tin dalsim"""
             self.data="L"
 
         else:
-            self.type=1
-            self.char=char
+            if len(char)==2 and char[0] == "!":
+                self.type=2
+                self.char=char[1]
+            else:
+                self.type=1
+                self.char=char
             self.data="L(" + char + ")"
 
     def do(self, ts):
@@ -47,7 +55,7 @@ se az v tin dalsim"""
         else:
             while 1:
                 ts.head-=1
-                if ts.tape[ts.head]==self.char:
+                if (self.type==1 and ts.tape[ts.head]==self.char) or (self.type==2 and ts.tape[ts.head]!=self.char):
                     break
 class C:
     """ Nahrazeni symbolu symbolem novym. Pokud se mu jako novy symbol
@@ -118,6 +126,12 @@ C"""
             return self.memory
         return mem
 
+    def do(self, ts):
+        s=list(ts.tape)
+        self.data="put " + self.memory + " (" + str(self) + ") "
+        s[ts.head]=str(self)
+        ts.tape="".join(s)
+
 class Note:
     """Vytiskne poznamku a nemeni nic na pasce """
     def __init__(self, t):
@@ -127,11 +141,12 @@ class Note:
 
 class TS:
     """ Vlastni turinguv stroj """
-    def __init__(self):
+    def __init__(self, verbose=True):
         self.counter=0
         self.cmd=[]
         self.con=[]
         self.mem={}
+        self.verbose=verbose
 
     def saveMem(self, name, value):
         self.mem[name]=value
@@ -147,6 +162,8 @@ class TS:
         return self.counter - 1
 
     def printTape(self, desc):
+        if not self.verbose:
+            return
         i=0
         for c in self.tape:
             if i==self.head:
@@ -176,13 +193,15 @@ class TS:
             # nalezeni dalsiho prechodu
             find=-1
             for s,e,c in self.con:
-                if s==self.command and (not c or str(c)==self.tape[self.head]):
+                if s==self.command and (not c or str(c)==self.tape[self.head] or (len(str(c)) == 2 and str(c)[0]=="!" and str(c)[1] != self.tape[self.head])):
                     find=e
-                    print "Prechod --> %s" % (c) 
+                    if self.verbose:
+                        print "Prechod --> %s" % (c) 
                     break
 
             if find != -1:
                 self.command=find
             else:
-                print "Automat se uspesne zastavil"
+                if self.verbose:
+                    print "Automat se uspesne zastavil"
                 break
