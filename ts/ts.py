@@ -120,6 +120,7 @@ C"""
     def __init__(self, ts, memory):
         self.ts=ts
         self.memory=memory
+        self.data=self.memory
     def __str__(self):
         mem = self.ts.getMem(self.memory)
         if mem == "":

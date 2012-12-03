@@ -16,3 +16,4 @@ ts.addCon(s3, s2)
 
 
 ts.test("_xyyxx_______________")
+#print ToGraph(ts)
