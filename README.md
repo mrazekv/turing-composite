@@ -38,12 +38,15 @@ Pristup k pameti
 =========================
 Pro cteni symbolu z pameti neni nutne pouzivat prvek C s prvkem MemRead, ale staci pouzit samotny MemRead s prvkem v konstruktoru ts a jmeno promenne
 
+Prechod pres vice promennych
+=============================
+Pokud prechod definujeme pro seznam (napr ["x", "y", "z"]), tak se definuje pro kazdy ze symbolu.
+
 Generovani obrazku
 ==========================
 Kdyz nagenerujeme TS, tak misto funkce "test" importujeme kreslici knihovnu
   
 ```python
-from tograph import ToGraph
 from ts import *
 ts=TS()
 # inicializace TS
