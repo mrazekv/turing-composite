@@ -179,15 +179,20 @@ class TS:
             self.printTape(c.data)
 
     def addCon(self, start, end, char=None):
+        # Vice retezcu
+        if isinstance(char, list):
+            for a in char:
+                self.addCon(start, end, a)
+            return
         # Nalezeni nedeterminismu
         for s,e,c in self.con:
             if start!=s:
                 continue
             if c==char:
                 raise Exception("Nedeterminismus")
-            if len(str(c)) == 2 and str(c)[0]=="!":
+            if len(str(c)) == 2 and str(c)[0]=="!" and c[1]!=char:
                 raise Exception("Nedeterminismus - uz je definovany NOT")
-            if len(str(char)) == 2 and str(char)[0]=="!":
+            if len(str(char)) == 2 and str(char)[0]=="!" and (str(char)[1])!=c:
                 raise Exception("Nedeterminismus - uz je definovany NOT")
 
         self.con+=[(start, end, char)]
