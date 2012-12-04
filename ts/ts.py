@@ -180,7 +180,7 @@ class TS:
 
     def addCon(self, start, end, char=None):
         # Vice retezcu
-        if isinstance(char, list):
+        if not isinstance(char, basestring):
             for a in char:
                 self.addCon(start, end, a)
             return
