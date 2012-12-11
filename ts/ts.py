@@ -168,7 +168,7 @@ class TS:
         i=0
         for c in self.tape:
             if i==self.head:
-                sys.stdout.write("\033[91m" + c + "\033[0m")
+                sys.stdout.write("\033[1m\033[31m" + c + "\033[0m")
             else:
                 sys.stdout.write(c)
             i=i+1
