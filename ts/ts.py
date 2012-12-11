@@ -157,6 +157,11 @@ class TS:
         except KeyError:
             return ""
 
+    def addCmd(self, *cmd):
+        if hasattr(cmd[0], '__iter__'):
+            self.cmd+=[cmd[0]]
+        else:
+            self.cmd+=[cmd]
     def AddCmd(self, cmd):
         self.cmd+=[cmd]
         self.counter+=1
