@@ -175,6 +175,11 @@ class TS:
         print "    " + desc
     def docmd(self, cmd):
         for c in cmd:
+            try:
+                c.do(self)
+            except AttributeError:
+                c = C(c)
+                c.do(self)
             c.do(self)
             self.printTape(c.data)
 
