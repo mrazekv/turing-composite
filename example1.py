@@ -2,8 +2,8 @@
 
 # data z https://www.fit.vutbr.cz/study/courses/TIN/public/Prednasky/tin-pr07-ts1.pdf
 from ts import *
-ts=TS()
+ts = TuringMachine()
 
-ts.AddCmd([R(), R(), R(), R(), Sr()])
+ts.add_command(R(), R(), R(), R(), Sr())
 
-ts.test("_xyyxx_________")
+ts.run("_xyyxx_________")
