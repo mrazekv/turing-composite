@@ -2,11 +2,11 @@
 
 # Ukazka ticheho rezimu
 from ts import *
-ts=TS(False)
+ts = TuringMachine(False)
 
-s=ts.AddCmd([R("!x"), R("!y"), L("!y")])
-n=ts.AddCmd([Note("test")])
-ts.addCon(s,n, "!z")
+s = ts.add_command([R("!x"), R("!y"), L("!y")])
+n = ts.add_command([Note("test")])
+ts.add_connection(s, n, "!z")
 
-ts.test("_xxxyyzzz_________")
+ts.run("_xxxyyzzz_________")
 print ts.tape

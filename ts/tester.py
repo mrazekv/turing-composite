@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
+
 import re
+
 
 class Tester(object):
     """
@@ -26,7 +29,7 @@ class Tester(object):
         counter = 0
         ok_counter = 0
         for case in self._test_cases:
-            self._ts.test(case[0])
+            self._ts.run(case[0])
             if re.match(case[1], self._ts.tape):
                 ok_counter += 1
             else:
