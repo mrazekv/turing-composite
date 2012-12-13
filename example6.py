@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Ukazka XORu a testovania vsetkych moznosti
+# Ukazka bitovej negacie a testovania
 
 from ts import *
 ts = TuringMachine(False)
