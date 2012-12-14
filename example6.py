@@ -5,9 +5,9 @@
 from ts import *
 ts = TuringMachine(False)
 
-do = ts.add_command([R()])
-do0 = ts.add_command([C('1')])
-do1 = ts.add_command([C('0')])
+do = ts.add_command(R())
+do0 = ts.add_command('1')
+do1 = ts.add_command('0')
 
 ts.add_connection(do, do0, '0')
 ts.add_connection(do0, do)
@@ -17,6 +17,7 @@ ts.add_connection(do1, do)
 
 # Otestuj to na 8 bitoch
 bits = 8
+
 for i in range(2 ** bits):
     # Preved na binarne cislo a zarovnaj na dany pocet bitov
     i_bin = bin(i)[2:]
@@ -32,3 +33,5 @@ for i in range(2 ** bits):
     # skontroluj vysledok
     mask = 2 ** bits - 1
     assert (~i & mask) == res, "Negacia nefunguje pre i=%d" % i
+
+print "Vse probehlo v poradku"
