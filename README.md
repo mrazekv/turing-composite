@@ -1,6 +1,5 @@
-turing-composite
+Turing Composite
 ================
-
 Deterministic turing machine simulator in composite format
 
 
@@ -10,6 +9,7 @@ Umoznuje simulaci TS v kompozitnim modelu. Obsahuje:
  - prechod L
  - prechod L_x
  - prechod R_x
+ - nahradu symbolu C - mozno zadat primo (misto C("a") jenom "a")
  - ukladani do pameti
  - cteni z pameti
  - Shift left (Sl)
@@ -48,7 +48,7 @@ Kdyz nagenerujeme TS, tak misto funkce "test" importujeme kreslici knihovnu
   
 ```python
 from ts import *
-ts=TS()
+ts=TuringMachine()
 # inicializace TS
 
 print ToGraph(ts)
